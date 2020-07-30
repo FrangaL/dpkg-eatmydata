@@ -7,8 +7,7 @@ Standards-Version: 3.9.8
 
 Package: dpkg-eatmydata
 Architecture: all
-Depends: ${shlibs:Depends}, ${misc:Depends},
-Pre-Depends: eatmydata
+Depends: ${misc:Depends}
 Description: simple wrapper to make dpkg faster (and unsafe)
  This package's purpose is to trade safety for execution speed in
  operations of _dpkg_ (and any program it may execute) by using

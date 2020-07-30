@@ -3,7 +3,7 @@
 set -e
 
 if [ upgrade != "$1" ] || dpkg --compare-versions "$2" lt 1.0-2; then
-    dpkg-divert --package dpkg-eatmydata --divert /usr/bin/dpkg.distrib --rename --add /usr/bin/dpkg
+    dpkg-divert --package dpkg-eatmydata --divert /usr/bin/dpkg.eatmydata --rename --add /usr/bin/dpkg
 fi
 
 #DEBHELPER#

@@ -13,3 +13,16 @@ data integrity!**
 On installation, `/usr/bin/dpkg` is moved aside and replaced with a
 wrapper script using _dpkg-divert(1)_, this process is of course
 reversed when removing this package.
+
+
+debootstrap --include=eatmydata .....
+
+- $R is your chroot directory
+
+```bash
+for archive in $R/var/cache/apt/archives/*eatmydata*.deb; do
+  dpkg-deb --fsys-tarfile "$archive" >$R/eatmydata
+  tar -xkf $R/eatmydata -C $R
+  rm -f $R/eatmydata
+done
+```

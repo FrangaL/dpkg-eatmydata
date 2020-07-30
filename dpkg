@@ -1,11 +1,12 @@
 #!/bin/sh
-if [ -e /usr/lib/libeatmydata.so ]; then
-    [ -n "$LD_PRELOAD" ] && LD_PRELOAD="$LD_PRELOAD:"
-    LD_PRELOAD="$LD_PRELOAD$so"
+LIB_ARCH=$(dpkg-architecture -qDEB_HOST_MULTIARCH)
+if [ -e /usr/lib/${LIB_ARCH}/libeatmydata.so ]; then
+    [ -n "${LD_PRELOAD}" ] && LD_PRELOAD="$LD_PRELOAD:"
+    LD_PRELOAD="$LD_PRELOAD\$so"
 fi
-for so in /usr/lib/*/libeatmydata.so; do
+for so in /usr/lib/${LIB_ARCH}/libeatmydata.so; do
     [ -n "$LD_PRELOAD" ] && LD_PRELOAD="$LD_PRELOAD:"
-    LD_PRELOAD="$LD_PRELOAD$so"
+    LD_PRELOAD="$LD_PRELOAD\$so"
 done
 export LD_PRELOAD
-exec "$0.distrib" "$@"
+exec $LD_PRELOAD "$0.eatmydata" --force-unsafe-io "$@"
